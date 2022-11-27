@@ -98,16 +98,21 @@ if (!(Get-Command node -ErrorAction SilentlyContinue)) {
 
 # install vscode
 if (!(Get-Command code -ErrorAction SilentlyContinue)) {
-    Write-Color "Installing vscode..." -Color DarkGray
-    winget install --id Microsoft.VisualStudioCode -e -i --source winget
-    Write-Color "Installed vscode" -Color DarkGray
+    $installVSCode = Read-Host -Prompt "Do you want to install vscode? [y/n]: [default: n]"
+    if ($installVSCode -eq "y") {
+        Write-Color "Installing vscode..." -Color DarkGray
+        winget install --id Microsoft.VisualStudioCode -e -i --source winget
+        Write-Color "Installed vscode" -Color DarkGray
+    } else {
+        Write-Color "Skipping vscode installation." -Color DarkGray
+    }
 } else {
     Write-Color "vscode is already installed" -Color DarkGray
 }
 
 # install telegram
 if (!(Get-Command telegram -ErrorAction SilentlyContinue)) {
-    installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
+    $installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
     if ($installTg -eq "y") {
         Write-Color "Installing telegram..." -Color DarkGray
         winget install --id Telegram.TelegramDesktop -e -i --source winget
@@ -121,7 +126,7 @@ if (!(Get-Command telegram -ErrorAction SilentlyContinue)) {
 
 # install zoom
 if (!(Get-Command zoom -ErrorAction SilentlyContinue)) {
-    installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
+    $installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
     if ($installZoom -eq "y") {
         Write-Color "Installing zoom..." -Color DarkGray
         winget install --id Zoom.Zoom -e -i --source winget
@@ -135,7 +140,7 @@ if (!(Get-Command zoom -ErrorAction SilentlyContinue)) {
 
 # install firefox
 if (!(Get-Command firefox -ErrorAction SilentlyContinue)) {
-    installFirefox = Read-Host -Prompt "Do you want to install firefox? [y/n]: [default: n]"
+    $installFirefox = Read-Host -Prompt "Do you want to install firefox? [y/n]: [default: n]"
     if ($installFirefox -eq "y") {
         Write-Color "Installing firefox..." -Color DarkGray
         winget install --id Mozilla.Firefox -e -i --source winget
