@@ -24,4 +24,4 @@ clip < ~/.ssh/id_ed25519.pub
 echo ""
 echo -e "\e[1;32mSSH key copied to clipboard\e[0m"
 
-start https://github.com/settings/keys
+echo -e "\e[0;30mGo to \e[0m\e[1;34mhttps://github.com/settings/keys\e[0m \e[0;30mto update your ssh key\e[0m"

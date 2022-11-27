@@ -23,7 +23,9 @@ if (!(Get-Command starship -ErrorAction SilentlyContinue)) {
 }
 
 # install PSReadline
-Test-IfModuleIsInstalled -ModuleName PSReadline -CMDString "Install-Module PSReadLine -Force -AllowPrerelease -AllowClobber -SkipPublisherCheck"
+$installPSReadline = Read-Host -Prompt "Do you want to install PSReadline? [y/n]: [default: n]"
+if ($installPSReadline -eq "y") {Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck}
+
 
 # install terminal icons
 Test-IfModuleIsInstalled -ModuleName Terminal-Icons -CMDString "Install-Module -Name Terminal-Icons -Repository PSGallery"
@@ -77,15 +79,13 @@ if (!(Test-Path $bashProfilePath)) {
     $bashProfilePath = Join-Path $HOME ".bashrc"
 }
 
-if (!(Test-Path $bashProfilePath)) {
-    $bprofileName = Read-Host -Prompt "Enter the name of your bash profile (e.g. .bashrc) [default: .bash_profile]:"
-    if ($bprofileName -eq "") {
-        $bprofileName = ".bash_profile"
-    }
-    $bashProfilePath = Join-Path $HOME $bprofileName
-    $bashPorfileText = Read-File -Path "bash/example.bash_profile"
-    Write-File -Path $bashProfilePath -Content $bashPorfileText
+$bprofileName = Read-Host -Prompt "Enter the name of your bash profile (e.g. .bashrc) [default: .bash_profile]:"
+if ($bprofileName -eq "") {
+    $bprofileName = ".bash_profile"
 }
+$bashProfilePath = Join-Path $HOME $bprofileName
+$bashPorfileText = Read-File -Path "bash/example.bash_profile"
+Write-File -Path $bashProfilePath -Content $bashPorfileText
 
 # install nodejs lts latest version
 if (!(Get-Command node -ErrorAction SilentlyContinue)) {
