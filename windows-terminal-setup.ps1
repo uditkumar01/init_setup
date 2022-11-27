@@ -81,7 +81,7 @@ if (!(Test-Path $bashProfilePath)) {
         $bprofileName = ".bash_profile"
     }
     $bashProfilePath = Join-Path $HOME $bprofileName
-    $bashPorfileText = Read-File -Path "bash/.bash_profile"
+    $bashPorfileText = Read-File -Path "bash/example.bash_profile"
     Write-File -Path $bashProfilePath -Content $bashPorfileText
 }
 
@@ -90,7 +90,7 @@ Write-Color "Few steps to follow:" -Color DarkGray
 Write-Color @("1. Install a nerd font ", "nerdfonts.com/font-downloads") -Color DarkGray, Yellow
 Write-Color "2. Set the nerd font as the terminal font (in Settings.Defaults)" -Color DarkGray
 Write-Color "3. Change the VSCode font to the nerd font" -Color DarkGray
-Write-Color @("4. Set up Github ssh key", " [bash <(curl -s https://raw.githubusercontent.com/ruanyf/simple-bash-scripts/master/calculator.sh)]") -Color DarkGray, Yellow
+Write-Color @("4. Set up Github ssh key", " [bash <(curl -s https://raw.githubusercontent.com/uditkumar01/init_setup/main/bash/create_git_ssh_key.sh)]") -Color DarkGray, Yellow
 
 Write-Color "`nRestart Windows Terminal to see changes" -Color DarkGray
 Write-Color "Finished setting up Windows Terminal" -Color DarkGray
