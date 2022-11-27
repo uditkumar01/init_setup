@@ -83,7 +83,7 @@ if (!(Test-Path $bashProfilePath)) {
         $bprofileName = ".bash_profile"
     }
     $bashProfilePath = Join-Path $HOME $bprofileName
-    $bashPorfileText = Read-File -Path "bash/.bash_profile"
+    $bashPorfileText = Read-File -Path "bash/example.bash_profile"
     Write-File -Path $bashProfilePath -Content $bashPorfileText
 }
 
