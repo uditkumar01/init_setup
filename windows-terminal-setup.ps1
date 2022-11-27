@@ -111,31 +111,23 @@ if (!(Get-Command code -ErrorAction SilentlyContinue)) {
 }
 
 # install telegram
-if (!(Get-Command telegram -ErrorAction SilentlyContinue)) {
-    $installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
-    if ($installTg -eq "y") {
-        Write-Color "Installing telegram..." -Color DarkGray
-        winget install --id Telegram.TelegramDesktop -e -i --source winget
-        Write-Color "Installed telegram" -Color DarkGray
-    } else {
-        Write-Color "Skipping telegram installation." -Color DarkGray
-    }
+$installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
+if ($installTg -eq "y") {
+    Write-Color "Installing telegram..." -Color DarkGray
+    winget install --id Telegram.TelegramDesktop -e -i --source winget
+    Write-Color "Installed telegram" -Color DarkGray
 } else {
-    Write-Color "telegram is already installed" -Color DarkGray
+    Write-Color "Skipping telegram installation." -Color DarkGray
 }
 
 # install zoom
-if (!(Get-Command zoom -ErrorAction SilentlyContinue)) {
-    $installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
-    if ($installZoom -eq "y") {
-        Write-Color "Installing zoom..." -Color DarkGray
-        winget install --id Zoom.Zoom -e -i --source winget
-        Write-Color "Installed zoom" -Color DarkGray
-    } else {
-        Write-Color "Skipping zoom installation." -Color DarkGray
-    }
+$installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
+if ($installZoom -eq "y") {
+    Write-Color "Installing zoom..." -Color DarkGray
+    winget install --id Zoom.Zoom -e -i --source winget
+    Write-Color "Installed zoom" -Color DarkGray
 } else {
-    Write-Color "zoom is already installed" -Color DarkGray
+    Write-Color "Skipping zoom installation." -Color DarkGray
 }
 
 # install firefox
