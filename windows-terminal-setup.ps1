@@ -23,7 +23,7 @@ if (!(Get-Command starship -ErrorAction SilentlyContinue)) {
 }
 
 # install PSReadline
-Test-IfModuleIsInstalled -ModuleName PSReadline -CMDString "Install-Module -Name PSReadLine -AllowClobber -Force"
+Test-IfModuleIsInstalled -ModuleName PSReadline -CMDString "Install-Module PSReadLine -Force -AllowPrerelease -AllowClobber -SkipPublisherCheck"
 
 # install terminal icons
 Test-IfModuleIsInstalled -ModuleName Terminal-Icons -CMDString "Install-Module -Name Terminal-Icons -Repository PSGallery"
