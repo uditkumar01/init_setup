@@ -1,0 +1,96 @@
+# import module member Write-Color
+Import-Module (Join-Path $PSScriptRoot "utils\write-color.psm1")
+Import-Module (Join-Path $PSScriptRoot "utils\write-file.psm1")
+Import-Module (Join-Path $PSScriptRoot "utils\read-file.psm1")
+Import-Module (Join-Path $PSScriptRoot "utils\test-if-module-is-installed.psm1")
+
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+if (!$isAdmin) {
+    Write-Error "You must run this script as an administrator"
+    exit
+}
+
+# install starship if not installed
+if (!(Get-Command starship -ErrorAction SilentlyContinue)) {
+    Write-Color "Installing starship..." -Color DarkGray
+    winget install --id Starship.Starship
+    Write-Color "Installed starship" -Color DarkGray
+} else {
+    Write-Color "starship is already installed" -Color DarkGray
+}
+
+# install PSReadline
+Test-IfModuleIsInstalled -ModuleName PSReadline -CMDString "Install-Module -Name PSReadLine -AllowClobber -Force"
+
+# install terminal icons
+Test-IfModuleIsInstalled -ModuleName Terminal-Icons -CMDString "Install-Module -Name Terminal-Icons -Repository PSGallery"
+
+
+# check if git is installed
+if (!(Get-Command git -ErrorAction SilentlyContinue)) {
+    # ask use if they want to use git or posh-git
+    $coloredText = @(
+        "Git is not installed. Do you want to install it?`n"
+        " 1. Git Bash"
+        " 2. posh-git"
+        " 3. None"
+    )
+    $gitChoice = Read-Host -Prompt (Write-Color $coloredText -Color White, DarkGray, DarkGray, DarkGray -Separator "`n")
+
+    # install git
+    switch ($gitChoice) {
+        1 {
+            Write-Color "Installing Git Bash..." -Color DarkGray
+            # install git
+            winget install --id Git.Git -e -i --source winget
+        }
+        2 {
+            Write-Color "Installing posh-git..." -Color DarkGray
+            # install posh-git
+            Install-Module -Name posh-git -AllowClobber -Force
+        }
+        default {
+            Write-Color "Skipping git installation." -Color DarkGray
+        }
+    }
+} else {
+    echo "git is already installed"
+}
+
+# read the current profile
+$profileText = Read-File -Path "pwsh/profile.ps1"
+# write to the profile
+Write-File -Path $PROFILE -Content $profileText
+
+$starshipConfigPath = Join-Path $HOME ".config\starship.toml"
+# read the current starship config
+$starshipConfigText = Read-File -Path "starship\starship.toml"
+# write to the starship config
+Write-File -Path $starshipConfigPath -Content $starshipConfigText
+
+# set bash profile check for .bashrc and .bash_profile
+$bashProfilePath = Join-Path $HOME ".bash_profile"
+if (!(Test-Path $bashProfilePath)) {
+    $bashProfilePath = Join-Path $HOME ".bashrc"
+}
+
+if (!(Test-Path $bashProfilePath)) {
+    $bprofileName = Read-Host -Prompt "Enter the name of your bash profile (e.g. .bashrc) [default: .bash_profile]:"
+    if ($bprofileName -eq "") {
+        $bprofileName = ".bash_profile"
+    }
+    $bashProfilePath = Join-Path $HOME $bprofileName
+    $bashPorfileText = Read-File -Path "bash/.bash_profile"
+    Write-File -Path $bashProfilePath -Content $bashPorfileText
+}
+
+# few steps to follow
+Write-Color "Few steps to follow:" -Color DarkGray
+Write-Color @("1. Install a nerd font ", "nerdfonts.com/font-downloads") -Color DarkGray, Yellow
+Write-Color "2. Set the nerd font as the terminal font (in Settings.Defaults)" -Color DarkGray
+Write-Color "3. Change the VSCode font to the nerd font" -Color DarkGray
+Write-Color @("4. Set up Github ssh key", " [bash <(curl -s https://raw.githubusercontent.com/ruanyf/simple-bash-scripts/master/calculator.sh)]") -Color DarkGray, Yellow
+
+Write-Color "`nRestart Windows Terminal to see changes" -Color DarkGray
+Write-Color "Finished setting up Windows Terminal" -Color DarkGray
