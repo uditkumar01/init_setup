@@ -11,6 +11,8 @@ if (!$isAdmin) {
     exit
 }
 
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
 # install starship if not installed
 if (!(Get-Command starship -ErrorAction SilentlyContinue)) {
     Write-Color "Installing starship..." -Color DarkGray
@@ -81,8 +83,68 @@ if (!(Test-Path $bashProfilePath)) {
         $bprofileName = ".bash_profile"
     }
     $bashProfilePath = Join-Path $HOME $bprofileName
-    $bashPorfileText = Read-File -Path "bash/example.bash_profile"
+    $bashPorfileText = Read-File -Path "bash/.bash_profile"
     Write-File -Path $bashProfilePath -Content $bashPorfileText
+}
+
+# install nodejs lts latest version
+if (!(Get-Command node -ErrorAction SilentlyContinue)) {
+    Write-Color "Installing nodejs..." -Color DarkGray
+    winget install --id OpenJS.NodeJS.LTS -e -i --source winget
+    Write-Color "Installed nodejs" -Color DarkGray
+} else {
+    Write-Color "nodejs is already installed" -Color DarkGray
+}
+
+# install vscode
+if (!(Get-Command code -ErrorAction SilentlyContinue)) {
+    Write-Color "Installing vscode..." -Color DarkGray
+    winget install --id Microsoft.VisualStudioCode -e -i --source winget
+    Write-Color "Installed vscode" -Color DarkGray
+} else {
+    Write-Color "vscode is already installed" -Color DarkGray
+}
+
+# install telegram
+if (!(Get-Command telegram -ErrorAction SilentlyContinue)) {
+    installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
+    if ($installTg -eq "y") {
+        Write-Color "Installing telegram..." -Color DarkGray
+        winget install --id Telegram.TelegramDesktop -e -i --source winget
+        Write-Color "Installed telegram" -Color DarkGray
+    } else {
+        Write-Color "Skipping telegram installation." -Color DarkGray
+    }
+} else {
+    Write-Color "telegram is already installed" -Color DarkGray
+}
+
+# install zoom
+if (!(Get-Command zoom -ErrorAction SilentlyContinue)) {
+    installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
+    if ($installZoom -eq "y") {
+        Write-Color "Installing zoom..." -Color DarkGray
+        winget install --id Zoom.Zoom -e -i --source winget
+        Write-Color "Installed zoom" -Color DarkGray
+    } else {
+        Write-Color "Skipping zoom installation." -Color DarkGray
+    }
+} else {
+    Write-Color "zoom is already installed" -Color DarkGray
+}
+
+# install firefox
+if (!(Get-Command firefox -ErrorAction SilentlyContinue)) {
+    installFirefox = Read-Host -Prompt "Do you want to install firefox? [y/n]: [default: n]"
+    if ($installFirefox -eq "y") {
+        Write-Color "Installing firefox..." -Color DarkGray
+        winget install --id Mozilla.Firefox -e -i --source winget
+        Write-Color "Installed firefox" -Color DarkGray
+    } else {
+        Write-Color "Skipping firefox installation." -Color DarkGray
+    }
+} else {
+    Write-Color "firefox is already installed" -Color DarkGray
 }
 
 # few steps to follow
@@ -90,7 +152,7 @@ Write-Color "Few steps to follow:" -Color DarkGray
 Write-Color @("1. Install a nerd font ", "nerdfonts.com/font-downloads") -Color DarkGray, Yellow
 Write-Color "2. Set the nerd font as the terminal font (in Settings.Defaults)" -Color DarkGray
 Write-Color "3. Change the VSCode font to the nerd font" -Color DarkGray
-Write-Color @("4. Set up Github ssh key", " [bash <(curl -s https://raw.githubusercontent.com/uditkumar01/init_setup/main/bash/create_git_ssh_key.sh)]") -Color DarkGray, Yellow
+Write-Color @("4. Set up Github ssh key", " [bash <(curl -s https://raw.githubusercontent.com/ruanyf/simple-bash-scripts/master/calculator.sh)]") -Color DarkGray, Yellow
 
 Write-Color "`nRestart Windows Terminal to see changes" -Color DarkGray
 Write-Color "Finished setting up Windows Terminal" -Color DarkGray
