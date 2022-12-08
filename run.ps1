@@ -21,5 +21,5 @@ $scriptPath = Join-Path $tmpDir "init_setup-main\windows-terminal-setup.ps1"
 # run the powershell file
 Invoke-Expression $scriptPath
 
-# remove the tmp directory
-Remove-Item -Path $tmpDir -Recurse
+# remove the tmp directory if it exists
+if (Test-Path $tmpDir) { Remove-Item -Path $tmpDir -Recurse }
