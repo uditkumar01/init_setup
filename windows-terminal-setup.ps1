@@ -18,13 +18,14 @@ if (!(Get-Command starship -ErrorAction SilentlyContinue)) {
     Write-Color "Installing starship..." -Color DarkGray
     winget install --id Starship.Starship
     Write-Color "Installed starship" -Color DarkGray
-} else {
+}
+else {
     Write-Color "starship is already installed" -Color DarkGray
 }
 
 # install PSReadline
 $installPSReadline = Read-Host -Prompt "Do you want to install PSReadline? [y/n]: [default: n]"
-if ($installPSReadline -eq "y") {Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck}
+if ($installPSReadline -eq "y") { Install-Module -Name PSReadLine -Scope CurrentUser -Force -SkipPublisherCheck }
 
 
 # install terminal icons
@@ -58,7 +59,8 @@ if (!(Get-Command git -ErrorAction SilentlyContinue)) {
             Write-Color "Skipping git installation." -Color DarkGray
         }
     }
-} else {
+}
+else {
     echo "git is already installed"
 }
 
@@ -89,45 +91,18 @@ Write-File -Path $bashProfilePath -Content $bashPorfileText
 
 # install nodejs lts latest version
 if (!(Get-Command node -ErrorAction SilentlyContinue)) {
-    Write-Color "Installing nodejs..." -Color DarkGray
-    winget install --id OpenJS.NodeJS.LTS -e -i --source winget
-    Write-Color "Installed nodejs" -Color DarkGray
-} else {
-    Write-Color "nodejs is already installed" -Color DarkGray
-}
-
-# install vscode
-if (!(Get-Command code -ErrorAction SilentlyContinue)) {
-    $installVSCode = Read-Host -Prompt "Do you want to install vscode? [y/n]: [default: n]"
-    if ($installVSCode -eq "y") {
-        Write-Color "Installing vscode..." -Color DarkGray
-        winget install --id Microsoft.VisualStudioCode -e -i --source winget
-        Write-Color "Installed vscode" -Color DarkGray
-    } else {
-        Write-Color "Skipping vscode installation." -Color DarkGray
+    $installNodeJS = Read-Host -Prompt "Do you want to install nodejs? [y/n]: [default: n]"
+    if ($installNodeJS -eq "y") {
+        Write-Color "Installing nodejs..." -Color DarkGray
+        winget install --id OpenJS.NodeJS.LTS -e -i --source winget
+        Write-Color "Installed nodejs" -Color DarkGray
     }
-} else {
-    Write-Color "vscode is already installed" -Color DarkGray
+    else {
+        Write-Color "Skipping nodejs installation." -Color DarkGray
+    }
 }
-
-# install telegram
-$installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
-if ($installTg -eq "y") {
-    Write-Color "Installing telegram..." -Color DarkGray
-    winget install --id Telegram.TelegramDesktop -e -i --source winget
-    Write-Color "Installed telegram" -Color DarkGray
-} else {
-    Write-Color "Skipping telegram installation." -Color DarkGray
-}
-
-# install zoom
-$installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
-if ($installZoom -eq "y") {
-    Write-Color "Installing zoom..." -Color DarkGray
-    winget install --id Zoom.Zoom -e -i --source winget
-    Write-Color "Installed zoom" -Color DarkGray
-} else {
-    Write-Color "Skipping zoom installation." -Color DarkGray
+else {
+    Write-Color "nodejs is already installed" -Color DarkGray
 }
 
 # install firefox
@@ -137,11 +112,51 @@ if (!(Get-Command firefox -ErrorAction SilentlyContinue)) {
         Write-Color "Installing firefox..." -Color DarkGray
         winget install --id Mozilla.Firefox -e -i --source winget
         Write-Color "Installed firefox" -Color DarkGray
-    } else {
+    }
+    else {
         Write-Color "Skipping firefox installation." -Color DarkGray
     }
-} else {
+}
+else {
     Write-Color "firefox is already installed" -Color DarkGray
+}
+
+# install vscode
+if (!(Get-Command code -ErrorAction SilentlyContinue)) {
+    $installVSCode = Read-Host -Prompt "Do you want to install vscode? [y/n]: [default: n]"
+    if ($installVSCode -eq "y") {
+        Write-Color "Installing vscode..." -Color DarkGray
+        winget install --id Microsoft.VisualStudioCode -e -i --source winget
+        Write-Color "Installed vscode" -Color DarkGray
+    }
+    else {
+        Write-Color "Skipping vscode installation." -Color DarkGray
+    }
+}
+else {
+    Write-Color "vscode is already installed" -Color DarkGray
+}
+
+# install telegram
+$installTg = Read-Host -Prompt "Do you want to install telegram? [y/n]: [default: n]"
+if ($installTg -eq "y") {
+    Write-Color "Installing telegram..." -Color DarkGray
+    winget install --id Telegram.TelegramDesktop -e -i --source winget
+    Write-Color "Installed telegram" -Color DarkGray
+}
+else {
+    Write-Color "Skipping telegram installation." -Color DarkGray
+}
+
+# install zoom
+$installZoom = Read-Host -Prompt "Do you want to install zoom? [y/n]: [default: n]"
+if ($installZoom -eq "y") {
+    Write-Color "Installing zoom..." -Color DarkGray
+    winget install --id Zoom.Zoom -e -i --source winget
+    Write-Color "Installed zoom" -Color DarkGray
+}
+else {
+    Write-Color "Skipping zoom installation." -Color DarkGray
 }
 
 # few steps to follow
