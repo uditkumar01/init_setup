@@ -63,7 +63,7 @@ if (!(Get-Command git -ErrorAction SilentlyContinue)) {
     }
 }
 else {
-    echo "git is already installed"
+    Write-Color "Git is already installed" -Color DarkGray
 }
 
 # read the current profile
