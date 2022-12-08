@@ -9,7 +9,7 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIde
 if (!$isAdmin) {
     Write-Error "You must run this script as an administrator"
     # remove the tmp directory if it exists
-    if (Test-Path $tmpDir) { Remove-Item -Path $tmpDir -Recurse }
+    # if (Test-Path $tmpDir) { Remove-Item -Path $tmpDir -Recurse }
     exit
 }
 
