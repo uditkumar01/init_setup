@@ -67,13 +67,13 @@ else {
 }
 
 # read the current profile
-$profileText = Read-File -Path "pwsh/profile.ps1"
+$profileText = Read-File -Path (Join-Path $PWD "pwsh/profile.ps1")
 # write to the profile
 Write-File -Path $PROFILE -Content $profileText
 
 $starshipConfigPath = Join-Path $HOME ".config\starship.toml"
 # read the current starship config
-$starshipConfigText = Read-File -Path "starship\starship.toml"
+$starshipConfigText = Read-File -Path (Join-Path $PWD "starship/starship.toml")
 # write to the starship config
 Write-File -Path $starshipConfigPath -Content $starshipConfigText
 
@@ -88,7 +88,7 @@ if ($bprofileName -eq "") {
     $bprofileName = ".bash_profile"
 }
 $bashProfilePath = Join-Path $HOME $bprofileName
-$bashPorfileText = Read-File -Path "bash/example.bash_profile"
+$bashPorfileText = Read-File -Path (Join-Path $PWD "bash/example.bash_profile")
 Write-File -Path $bashProfilePath -Content $bashPorfileText
 
 # install nodejs lts latest version
