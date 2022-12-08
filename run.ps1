@@ -12,8 +12,6 @@ Invoke-WebRequest -Uri $zipURL -OutFile (Join-Path $tmpDir "main.zip")
 # extract the zip file
 Expand-Archive -Path (Join-Path $tmpDir "main.zip") -DestinationPath $tmpDir
 
-# usr current dir location
-
 # cd to the extracted directory
 Set-Location (Join-Path $tmpDir "init_setup-main")
 
