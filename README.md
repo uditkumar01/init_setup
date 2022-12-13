@@ -1,6 +1,7 @@
 # Powershell script to setup my windows machine
 
 ```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser # this will allow remotely signed scripts to execute
 Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/uditkumar01/init_setup/main/run.ps1')
 ```
 
