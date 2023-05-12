@@ -7,7 +7,7 @@ Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://raw.
 
 Copy the above code and paste it in the powershell terminal and hit enter. It will download the script and run it. It will take some time to download and run the script.
 
-## By default, it will setup:
+### By default, it will setup:
 
 - `Starship` cross-shell prompt
 - `PSReadLine` for autocomplete
