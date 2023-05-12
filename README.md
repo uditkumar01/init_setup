@@ -1,4 +1,4 @@
-# Powershell script to setup my windows machine
+## Powershell script to setup my windows machine
 
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser # this will allow remotely signed scripts to execute
