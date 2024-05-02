@@ -10,12 +10,12 @@ $all[╰─](238)$character"""
 
 # Change the default prompt characters
 [character]
-success_symbol = "[](238)"
-error_symbol = "[](238)"
+success_symbol = "[➤](238)"
+error_symbol = "[➤](238)"
 
 # Shows an icon that should be included by zshrc script based on the distribution or os
 [env_var.SHOW_STARSHIP_DISTRO]
-format = '者 (bold white)'  # removed space between distro and rest for pwsh
+format = '⚽  (bold white)'  # removed space between distro and rest for pwsh
 variable = "SHOW_STARSHIP_DISTRO"
 disabled = false
 
@@ -29,9 +29,9 @@ show_always = true
 [directory]
 truncation_length = 3
 truncation_symbol = "…/"
-home_symbol = " ~"
+home_symbol = "⌂ ~"
 read_only_style = "197"
-read_only = "  "
+read_only = " 🕮 "
 format = "at [$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
@@ -45,42 +45,49 @@ style = "bold green"
 format = '[\($all_status$ahead_behind\)]($style) '
 style = "bold green"
 conflicted = "🏳"
-up_to_date = " "
-untracked = " "
+up_to_date = "✅"
+untracked = "❗ "
 ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
-stashed = " "
-modified = " "
+stashed = "📦"
+modified = "✏️ "
 staged = '[++\($count\)](green)'
-renamed = "襁 "
-deleted = " "
+renamed = "👅 "
+deleted = "🗑️ "
 
 [terraform]
-format = "via [ terraform $version]($style) 壟 [$workspace]($style) "
+format = "via [💠 terraform $version]($style) 壟 [$workspace]($style) "
 
 [vagrant]
-format = "via [ vagrant $version]($style) "
+format = "via [ vagrant $version]($style) "
 
 [docker_context]
-format = "via [ $context](bold blue) "
+format = "via [🐳 $context](bold blue) "
 
 [helm]
-format = "via [ $version](bold purple) "
+format = "via [⎈ $version](bold purple) "
 
 [python]
-symbol = " "
+symbol = "🐍 "
 python_binary = "python3"
 
 [nodejs]
-format = "via [ $version](bold green) "
+format = "via [⬢ $version](bold green) "
 disabled = true
 
+[conda]
+format = '[$symbol$environment](dimmed green) '
+
 [ruby]
-format = "via [ $version]($style) "
+format = "via [💎 $version]($style) "
 
 [kubernetes]
-format = 'on [ $context\($namespace\)](bold purple) '
+format = 'on [⎈ $context\($namespace\)](bold purple) '
+
+[golang]
+format = 'via [🏎💨 $version](bold cyan) '
+
 disabled = false
 [kubernetes.context_aliases]
 "clcreative-k8s-staging" = "cl-k8s-staging"
